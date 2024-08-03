@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <form action="<%= car._id ? '/admin/cars/edit/' + car._id : '/admin/cars' %>" method="POST">
+        <input type="text" name="name" value="<%= car.name || '' %>" placeholder="Car Name" required>
+        <input type="number" name="year" value="<%= car.year || '' %>" placeholder="Manufacturing Year" required>
+        <input type="number" name="price" value="<%= car.price || '' %>" placeholder="Price" required>
+        <button type="submit"><%= car._id ? 'Update' : 'Add' %></button>
+    </form>
+    <% if (cars) { %>
+        <h2>List of Cars</h2>
+        <ul>
+            <% cars.forEach(car => { %>
+                <li>
+                    <%= car.name %> - <%= car.year %> - $<%= car.price %>
+                </li>
+            <% }) %>
+        </ul>
+    <% } %>
+</body>
+</html>
