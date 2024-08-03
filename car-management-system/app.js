@@ -24,6 +24,11 @@ const isAuthenticated = (req, res, next) => {
     res.redirect('/login');
 };
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the Car Management System');
+    // Alternatively, you could render a view:
+    // res.render('index');
+});
 // Admin Login
 app.get('/admin/login', (req, res) => {
     res.render('admin-login', { title: 'Assignment for Quadiro Technologies' });
@@ -69,7 +74,7 @@ app.get('/admin/cars/new', isAuthenticated, (req, res) => {
     res.render('cars', { car: {}, title: 'Add New Car' });
 });
 
-app.post('/admin/cars', isAuthenticated, async (req, res) => {
+app.post('/admin/cars/', isAuthenticated, async (req, res) => {
     if (req.session.user.role !== 'admin') return res.redirect('/admin/login');
     const { name, year, price } = req.body;
     await Car.create({ name, year, price });
